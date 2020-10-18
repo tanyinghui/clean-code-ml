@@ -1,68 +1,39 @@
-# clean-code-ml refactoring exercise
+# clean-code-ml refactoring exercise setup
 
-## Pre-workshop setup
+## Prerequisites
 
 Please ensure you have the following:
+
 - a [GitHub](https://github.com/) account
 - a [CircleCI](https://circleci.com) account
 - an IDE ([VS Code](https://code.visualstudio.com/Download) or [PyCharm](https://www.jetbrains.com/pycharm/download/))
-- Windows users:
-    - Download [Git Bash](https://gitforwindows.org/)
-- Docker for Desktop (Install for [Mac](https://docs.docker.com/docker-for-mac/install/), [Linux](https://docs.docker.com/install/linux/docker-ce/ubuntu/), [Windows](https://docs.docker.com/docker-for-windows/install/))
-    - If you don't have a dockerhub account, you will be prompted to create one. It's free
+- [Windows Users only] Install [git bash](https://gitforwindows.org/). We will be using `git bash` as the terminal for the workshop.
 
 ## Getting started
 
 1. Fork repo
 1. Clone repository: `git clone https://github.com/YOUR_USERNAME/clean-code-ml`
-1. Start Docker on your desktop
-1. Update your git username and email in `Dockerfile`
-1. Build image and start container:
+1. Project setup. You can either use docker or conda. Choose whichever you prefer:
 
-```shell
-# build docker image
-docker build . -t clean-code-ml
+- docker ([workshop setup instructions](./setup-docker.md))
+- conda ([workshop setup instructions](./setup-conda.md))
+  - Mac/Linux users
+  - Windows users
 
-docker run -it  -v $(pwd):/home/clean-code-ml \
-                -p 8888:8888 \
-                clean-code-ml bash
-```
-
-You're ready to roll! Here are some common commands that you can run in your dev workflow. Run these in the container.
-
-#### Run tests
-
-```shell
-# run unit tests
-nosetests
-
-# run unit tests in watch mode and color output
-nosetests --with-watch --rednose --nologcapture
-```
-
-#### Start another bash shell in the running container
-```shell
-# see list of running containers
-docker ps
-
-# start a bash shell in a running container
-docker exec -it <container-id> bash
-```
-
-#### Start jupyter notebook
-
-```shell
-# starting jupyter notebook server on http://localhost:8888
-jupyter notebook --ip 0.0.0.0 --no-browser --allow-root
-
-# Now you can visit localhost:8888 on your browser. The required token can be found in the output of the `jupyter notebook ...` command
-```
+If you encounter any errors, please refer to [FAQs](./FAQs.md) for a list of common errors and how to fix them.
 
 ## IDE configuration
 
-Run `bin/configure_venv_locally.sh`. This will create a virtual environment directory (named `.venv-local`) on your computer (the host). Next, configure your IDE to use `.venv-local/bin/python` as the Python interpreter. Here are the instructions on how to do that in [VS Code](https://code.visualstudio.com/docs/python/environments) and [PyCharm](https://www.jetbrains.com/help/pycharm/configuring-python-interpreter.html).
+Configure your IDE to use `~/miniconda3/envs/clean-code-ml/bin/python` as the Python interpreter. Here are the instructions on how to do that in [VS Code](https://code.visualstudio.com/docs/python/environments) and [PyCharm](https://www.jetbrains.com/help/pycharm/configuring-python-interpreter.html).
 
+Once you've done that, you should be able to:
+
+1. Get helpful auto-complete suggestions in your IDE as you type. If somehow that's not showing up, try restarting your code editor.
+1. Let your IDE auto-format your code in a file. We've installed [autopep8](https://github.com/hhatto/autopep8) using conda, and now your IDE can help you with the auto-formatting)
+   - To do this in VS Code, hit `Shift` + `⌘` + `F`
+1. Use other tools provided by your IDE.
+   - For VS Code, hit `F1` and type 'Python Refactor' and you can experiment with any of these commands (e.g. 'Sort Imports')
 
 ## Attributions
 
-The notebook which we use for the starting point of our refactoring exercise was adapted/modified from a [Kaggle submission](https://www.kaggle.com/bhaveshsk/getting-started-with-titanic-dataset/data) for the titanic competition. 
+The notebook which we use for the starting point of our refactoring exercise was adapted/modified from a [Kaggle submission](https://www.kaggle.com/bhaveshsk/getting-started-with-titanic-dataset/data) for the titanic competition.
